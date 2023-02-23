@@ -4,13 +4,18 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products/5",
-    "method": "GET",
+    "url": "http://localhost:3000/products",
+    "method": "POST",
     "sortNum": 0,
     "created": "2023-02-15T23:30:25.639Z",
-    "modified": "2023-02-23T14:24:08.529Z",
+    "modified": "2023-02-23T17:33:33.275Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"nao\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

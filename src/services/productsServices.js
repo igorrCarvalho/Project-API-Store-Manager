@@ -1,4 +1,4 @@
-const { getAllProducts, getProductById } = require('../models/productsModel');
+const { getAllProducts, getProductById, insertProduct } = require('../models/productsModel');
 
 const supplyAllProducts = async () => getAllProducts();
 
@@ -10,7 +10,13 @@ const supplyProductById = async (id) => {
   return { type: false, message: product[0] };
 };
 
+const insertNewProduct = async (product) => {
+  const insertSuccess = await insertProduct(product);
+  return insertSuccess;
+};
+
 module.exports = {
   supplyAllProducts,
   supplyProductById,
+  insertNewProduct,
 };
