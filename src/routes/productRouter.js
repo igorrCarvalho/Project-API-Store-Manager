@@ -1,6 +1,6 @@
 const express = require('express');
-const { supplyProductById } = require('../services/productsServices');
-const { getAllProducts, insertProduct } = require('../models/productsModel');
+const { supplyProductById, insertNewProduct } = require('../services/productsServices');
+const { getAllProducts } = require('../models/productsModel');
 
 const router = express.Router();
 
@@ -21,8 +21,13 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { name } = req.body;
-  const insert = await insertProduct(name);
-  return res.status(201).json(insert);
+  const validateInsert = await insertNewProduct(name);
+  const { type, message } = validateInsert;
+  if (type) {
+    return res.status(type).json({ message });
+  }
+
+  return res.status(201).json(message);
 });
 
 module.exports = router;
