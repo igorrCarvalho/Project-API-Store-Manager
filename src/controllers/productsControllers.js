@@ -7,12 +7,13 @@ const showProducts = async (req, res) => {
 
 const showProductById = async (req, res) => {
   const { id } = req.params;
-  const product = await supplyProductById(id);
-  const { type, message } = product;
+  const { type, message } = await supplyProductById(id);
   if (type) {
-    return res.status(type).json({ message });
+    console.log(entrou);
+    return res.status(type).json({ oi: 'sim' });
   }
-  return res.status(200).json({ message });
+  console.log('n entrou')
+  return res.status(200).json({ oi: 'nao' });
 };
 
 module.exports = {

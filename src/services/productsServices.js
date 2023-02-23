@@ -4,10 +4,10 @@ const supplyAllProducts = async () => getAllProducts();
 
 const supplyProductById = async (id) => {
   const product = await getProductById(id);
-  if (!product) {
-    return { type: 404, message: 'Product not found' };
+  if (!product.length) {
+    return { oi: 'nao' };
   }
-  return { type: false, message: product };
+  return { oi: 'sim' };
 };
 
 module.exports = {
