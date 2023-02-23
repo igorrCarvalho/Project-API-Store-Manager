@@ -1,4 +1,4 @@
-const { supplyAllProducts, supplyProductById } = require('../services/productsServices');
+/* const { supplyAllProducts, supplyProductById } = require('../services/productsServices');
 
 const showProducts = async (req, res) => {
   const allProducts = await supplyAllProducts();
@@ -19,4 +19,4 @@ const showProductById = async (req, res) => {
 module.exports = {
   showProducts,
   showProductById,
-};
+}; */
