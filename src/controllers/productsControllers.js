@@ -1,4 +1,4 @@
-/* const { supplyAllProducts, supplyProductById } = require('../services/productsServices');
+const { supplyAllProducts, supplyProductById } = require('../services/productsServices');
 
 const showProducts = async (req, res) => {
   const allProducts = await supplyAllProducts();
@@ -9,14 +9,12 @@ const showProductById = async (req, res) => {
   const { id } = req.params;
   const { type, message } = await supplyProductById(id);
   if (type) {
-    console.log(entrou);
-    return res.status(type).json({ oi: 'sim' });
+    return res.status(type).json(message);
   }
-  console.log('n entrou')
-  return res.status(200).json({ oi: 'nao' });
+  return res.status(200).json(message);
 };
 
 module.exports = {
   showProducts,
   showProductById,
-}; */
+};

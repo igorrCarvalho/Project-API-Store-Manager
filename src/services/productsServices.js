@@ -10,6 +10,8 @@ const supplyProductById = async (id) => {
   return { type: false, message: product[0] };
 };
 
+supplyProductById(1);
+
 const insertNewProduct = async (name) => {
   if (!name) {
     return { type: 400, message: '"name" is required' };
