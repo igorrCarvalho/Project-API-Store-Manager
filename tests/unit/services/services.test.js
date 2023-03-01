@@ -25,7 +25,7 @@ describe('Teste de unidade do services', function () {
 
     const product = await supplyProductById(1);
     expect(product.type).to.equal(false);
-    expect(product.message).to.equal([store[0]]);
+    expect(product.message).to.equal(store[0]);
   });
 
   it('Não é possível buscar um produto por um ID inexistente', async function () {
