@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const { getSales } = require('../models/salesModels');
 const { verifySaleById } = require('../services/salesServices');
 
@@ -19,4 +19,4 @@ salesRouter.get('/:id', async (req, res) => {
   return res.status(200).json(message);
 });
 
-module.exports = salesRouter;
+module.exports = salesRouter; */

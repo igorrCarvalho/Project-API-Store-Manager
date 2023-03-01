@@ -1,4 +1,4 @@
-const connection = require('./connection');
+/* const connection = require('./connection');
 
 const getSales = async () => {
   const [result] = await connection.execute(
@@ -18,4 +18,4 @@ const getSaleById = async (id) => {
 module.exports = {
   getSales,
   getSaleById,
-};
+}; */
