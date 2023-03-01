@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { supplyProductById, supplyAllProducts } = require('../../../src/services/productsServices');
+const { supplyProductById, supplyAllProducts, insertNewProduct } = require('../../../src/services/productsServices');
 const productsModel = require('../../../src/models/productsModel');
 
 const { store } = require('../mocks/products');
@@ -36,4 +36,10 @@ describe('Teste de unidade do services', function () {
     expect(product.type).to.equal(404);
     expect(product.message).to.equal('Product not found');
   });
+
+  it('Não é possível inserir produto sem nome', async function () {
+    const result = await insertNewProduct();
+    expect(result).to.be.deep.equal({ type: 400, message: '"name" is required' });
+  });
+  
 });

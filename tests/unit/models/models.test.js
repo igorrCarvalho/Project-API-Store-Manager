@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { getAllProducts, getProductById } = require('../../../src/models/productsModel');
+const { getAllProducts, getProductById, insertProduct } = require('../../../src/models/productsModel');
 
 const connection = require('../../../src/models/connection');
-const { store } = require('../mocks/products');
+const { store, storeWithNewItem } = require('../mocks/products');
 
 describe('Testes de unidade do models', function () {
   afterEach(function () {
@@ -20,5 +20,11 @@ describe('Testes de unidade do models', function () {
     sinon.stub(connection, 'execute').resolves([[store[0]]]);
     const product = await getProductById(1);
     expect(product).to.be.deep.equal([store[0]]);
+  });
+
+  it('Insere um produto com sucesso', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insetId: 4 }]);
+    const productAdded = await insertProduct('Manopla do infinito');
+    expect(productAdded).to.be.deep.equal(storeWithNewItem[3]);
   });
 });
