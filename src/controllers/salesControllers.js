@@ -4,7 +4,7 @@ const { supplyAllSales, supplySaleById } = require('../services/salesServices');
 const supplySale = async (req, res) => {
     const productsSales = req.body;
     const allSales = await getSales();
-    const saleId = allSales.length + 1;
+    const saleId = allSales.length;
     await insertSale(saleId);
     await Promise.all(productsSales.map(async (obj) => {
       const { productId, quantity } = obj;

@@ -1,6 +1,10 @@
 const express = require('express');
 const { insertNewProduct } = require('../services/productsServices');
-const { showProducts, showProductById } = require('../controllers/productsControllers');
+const {
+  showProducts,
+  showProductById,
+  deleteProductResponse,
+} = require('../controllers/productsControllers');
 
 const router = express.Router();
 
@@ -18,5 +22,7 @@ router.post('/', async (req, res) => {
 
   return res.status(201).json(message);
 });
+
+router.delete('/:id', deleteProductResponse);
 
 module.exports = router;

@@ -1,4 +1,9 @@
-const { getAllProducts, getProductById, insertProduct } = require('../models/productsModel');
+const {
+  getAllProducts,
+  getProductById,
+  insertProduct,
+  deleteProduct,
+} = require('../models/productsModel');
 
 const supplyAllProducts = async () => getAllProducts();
 
@@ -23,8 +28,18 @@ const insertNewProduct = async (name) => {
   return { type: false, message: insertSuccess };
 };
 
+const supplyDeleteProduct = async (id) => {
+  const product = await getProductById(id);
+  if (product.length === 0) {
+    return { type: 404, message: 'Product not found' };
+  }
+  await deleteProduct(id);
+  return { type: false, message: 'success' };
+};
+
 module.exports = {
   supplyAllProducts,
   supplyProductById,
   insertNewProduct,
+  supplyDeleteProduct,
 };
