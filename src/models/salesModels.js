@@ -9,7 +9,7 @@ const getSales = async () => {
 
 const getSaleById = async (id) => {
   const [result] = await connection.execute(
-    'SELECT * FROM StoreManager.sales WHERE saleId = ? ORDER BY saleId ASC, productId ASC',
+    'SELECT * FROM StoreManager.sales WHERE sale_id = ?',
     [id],
   );
   return result;
@@ -19,6 +19,7 @@ const insertSalesProducts = async (saleId, productId, quantity) => {
   await connection.execute(
     'INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUE (?, ?, ?)',
     [saleId, productId, quantity],
+   
   );
   return { productId, quantity };
 };

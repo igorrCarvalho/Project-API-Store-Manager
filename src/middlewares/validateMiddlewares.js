@@ -1,5 +1,6 @@
-const { getAllProducts } = require('../models/productsModel');
+const { getProductById } = require('../models/productsModel');
 
+// Esta parte do código foi reformulada em conjunto com a Thais
 const validateProductId = (req, res, next) => {
   const arr = req.body;
   let hasntProductId = 0;
@@ -11,33 +12,36 @@ const validateProductId = (req, res, next) => {
   if (hasntProductId !== 0) {
     return res.status(400).json({ message: '"productId" is required' });
   }
-  return next();  
+  return next();
 };
 
-const validateQuantity = (req, res, next) => {
+const validateQuantity = async (req, res, next) => {
   const arr = req.body;
-  arr.forEach((obj) => {
-    if (obj.quantity === 0) {
-      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
-    }
-    if (obj.quantity < 0) {
-      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
-    }
-    if (!obj.quantity) {
-      return res.status(400).json({ message: '"quantity" is required' });
-    }
-  });
+  console.log(arr);
+  const test = arr.every((e) => e.quantity === 0 || e.quantity < 0);
+  const test2 = arr.every((e) => e.quantity === undefined);
+  console.log(test2, 'test');
+  if (test) {
+    return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
+  }
+  if (test2) {
+    return res.status(400).json({ message: '"quantity" is required' });
+  }
   next();
 };
 
 const validateProductIdDB = async (req, res, next) => {
-  const allProducts = await getAllProducts();
   const arr = req.body;
-  arr.forEach((obj) => {
-    if (!allProducts.some((product) => Number(obj.productId) === Number(product.id))) {
-      return res.status(404).json({ message: 'Product not found' });
+  let itemDontExists = 0;
+  await Promise.all(arr.map(async (obj) => {
+    const itemId = Number(obj.productId);
+    const itemWithId = await getProductById(itemId);
+    if (itemWithId.length === 0) {
+      itemDontExists += 1;
     }
-  });
+    return itemWithId;
+  }));
+    if (itemDontExists !== 0) return res.status(404).json({ message: 'Product not found' });
   return next();
 };
 
