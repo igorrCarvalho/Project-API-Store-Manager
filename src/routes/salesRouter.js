@@ -33,10 +33,10 @@ salesRouter.post('/',
   const allSales = await getSales();
   const saleId = allSales.length + 1;
   await insertSale(saleId);
-  productsSales.forEach(async (obj) => {
+  await Promise.all(productsSales.forEach(async (obj) => {
     const { productId, quantity } = obj;
     await insertSalesProducts(saleId, productId, quantity);
-  });
+  }));
   const saleAdded = { id: saleId, itemsSold: productsSales };
   return res.status(201).json(saleAdded);
 });

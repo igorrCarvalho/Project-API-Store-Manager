@@ -23,7 +23,7 @@ describe('Testes de unidade do models', function () {
   });
 
   it('Insere um produto com sucesso', async function () {
-    sinon.stub(connection, 'execute').resolves([{ insetId: 4 }]);
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }]);
     const productAdded = await insertProduct('Manopla do infinito');
     expect(productAdded).to.be.deep.equal(storeWithNewItem[3]);
   });
