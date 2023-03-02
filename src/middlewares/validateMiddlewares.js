@@ -18,13 +18,12 @@ const validateProductId = (req, res, next) => {
 const validateQuantity = async (req, res, next) => {
   const arr = req.body;
   console.log(arr);
-  const test = arr.every((e) => e.quantity === 0 || e.quantity < 0);
-  const test2 = arr.every((e) => e.quantity === undefined);
-  console.log(test2, 'test');
-  if (test) {
+  const validateQuant = arr.every((e) => e.quantity === 0 || e.quantity < 0);
+  const quantityExists = arr.every((e) => e.quantity === undefined);
+  if (validateQuant) {
     return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
   }
-  if (test2) {
+  if (quantityExists) {
     return res.status(400).json({ message: '"quantity" is required' });
   }
   next();
