@@ -1,4 +1,4 @@
-/* const { getSaleById } = require('../models/salesModels');
+const { getSaleById } = require('../models/salesModels');
 
 const verifySaleById = async (id) => {
   const sale = await getSaleById(id);
@@ -11,4 +11,4 @@ const verifySaleById = async (id) => {
 
 module.exports = {
   verifySaleById,
-}; */
+};
