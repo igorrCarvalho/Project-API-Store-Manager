@@ -4,7 +4,9 @@ const {
   showProducts,
   showProductById,
   deleteProductResponse,
+  updateProductResponse,
 } = require('../controllers/productsControllers');
+const { validateProductName } = require('../middlewares/validateMiddlewares');
 
 const router = express.Router();
 
@@ -22,6 +24,8 @@ router.post('/', async (req, res) => {
 
   return res.status(201).json(message);
 });
+
+router.put('/:id', validateProductName, updateProductResponse);
 
 router.delete('/:id', deleteProductResponse);
 

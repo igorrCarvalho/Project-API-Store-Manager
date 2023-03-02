@@ -1,5 +1,16 @@
 const { getProductById } = require('../models/productsModel');
 
+const validateProductName = async (req, res, next) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ message: '"name" is required' });
+  }
+  if (name.length < 5) {
+    return res.status(422).json({ message: '"name" length must be at least 5 characters long' });
+  }
+  next();
+};
+
 // Esta parte do código foi reformulada em conjunto com a Thais
 const validateProductId = (req, res, next) => {
   const arr = req.body;
@@ -48,4 +59,5 @@ module.exports = {
   validateProductId,
   validateQuantity,
   validateProductIdDB,
+  validateProductName,
 };
